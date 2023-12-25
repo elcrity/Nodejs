@@ -7,7 +7,7 @@ app.use(express.static('public/img'))
 app.use(express.static('public/css'))
 
 app.get('/', (request, response) => {
-    readFile('chap01/test.html', 'utf-8', (err, data) =>{
+    readFile('./views/main.html', 'utf-8', (err, data) =>{
         if(err) {response.send('Not Found File')}
         response.send(data)
     })

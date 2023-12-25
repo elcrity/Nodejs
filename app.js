@@ -1,6 +1,7 @@
 import express, { response } from 'express'
 import { readFile } from 'fs'
 
+console.log("node start1");
 const app = express()
 
 app.use(express.static('public/img'))
