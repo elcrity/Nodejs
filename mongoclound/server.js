@@ -1,12 +1,13 @@
 import mongoose from "mongoose"
+// const mongoose = require('mongoose')
 import express from "express"
 import { User } from "./models/User.js"
 import { readFile } from "fs";
-// const mongoose = require('mongoose')
+import {MONGO_URL} from './dburl.js'
+
 
 
 const app = express();
-const MONGO_URL = 'mongodb+srv://root:root@elcrity.uc5pezs.mongodb.net/nodejs?retryWrites=true&w=majority'
 
 
 console.log("mongod");
