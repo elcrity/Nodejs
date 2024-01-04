@@ -1,8 +1,9 @@
 import express, { response } from 'express'
 import { readFile } from 'fs'
+import server from './server'
 
 const app = express()
-console.log("chap1");
+console.log("mongod");
 app.use(express.static('public/img'))
 app.use(express.static('public/css'))
 

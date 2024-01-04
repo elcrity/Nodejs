@@ -1,14 +1,14 @@
 import express, { response } from 'express'
 import { readFile } from 'fs'
 
-console.log("node start1");
+console.log("node start");
 const app = express()
 
 app.use(express.static('public/img'))
 app.use(express.static('public/css'))
 
 app.get('/', (request, response) => {
-    readFile('public/chap01/test.html', 'utf-8', (err, data) =>{
+    readFile('mongocloud/test.html', 'utf-8', (err, data) =>{
         if(err) {response.send('Not Found File')}
         response.send(data)
     })
