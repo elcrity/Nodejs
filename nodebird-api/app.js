@@ -9,17 +9,16 @@ const passport = require('passport')
 
 dotenv.config();
 
-const pageRouter = require('./routes/page')
+const indexRouter = require('./routes')
 const authRouter = require('./routes/auth')
-const postRouter = require('./routes/post')
-const userRouter = require('./routes/user')
+const v1Router = require('./routes/v1')
 const { sequelize } = require('./models');
 const passportConfig = require('./passport')
 
 const app = express();
 passportConfig();
 
-app.set('port', process.env.PORT || 8080);
+app.set('port', process.env.PORT || 8081);
 app.set('view engine', 'html');
 nunjucks.configure('views', {
     express : app,
@@ -38,7 +37,6 @@ app.use(morgan('dev'));
 //public 디렉토리의 절대경로를 생성 후 html,이미지,css등의 정적 파일을 제공
 // app.use(e.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
-app.use('/img', express.static(path.join(__dirname, 'uploads')));
 //json페이로드로 들어오는 요청을 파싱, json형식의 본문을 파싱해서 req.body로 사용 가능하게 함
 app.use(express.json());
 //url-encorede 페이로드를 가진 요청을 파싱,  폼 데이터를 포함하는 요청을 파싱해서 req.body로 사용할수 있게 만듬, 
@@ -66,10 +64,9 @@ app.use(passport.initialize());
 // req.session객체에 passport 정보 저장
 app.use(passport.session());
 
-app.use('/', pageRouter);
+app.use('/', indexRouter);
+app.use('/v1', v1Router);
 app.use('/auth', authRouter);
-app.use('/post', postRouter);
-app.use('/user', userRouter);
 app.use((req, res, next) => {
     const err = new Error(`${req.method} ${req.url} 라우터 존재x`)
     err.status = 404;
