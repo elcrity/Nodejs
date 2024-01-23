@@ -14,15 +14,15 @@ exports.isLoggedIn = (req, res, next) => {
 
 exports.isNotLoggedIn = (req, res, next) =>{
     if(req.isAuthenticated()){
-        const message = encodedURIComponent('로그인한 상태입니다');
-        res.redirect('/?error=${message}');
+        const message = encodeURIComponent('로그인한 상태입니다');
+        res.redirect(`/?error=${message}`);
         return;
     }
     next();
     // if(req.isAuthenticated()){
     //     next();
     // }else{
-    //     const message = encodedURIComponent('로그인한 상태입니다');
+    //     const message = encodeURIComponent('로그인한 상태입니다');
     //     res.redirect('/?error=${message}')
     // }
 }
